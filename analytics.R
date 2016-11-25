@@ -2,6 +2,11 @@
 #load required libraries
 library(ape)
 library(bnlearn)
+library(doMC)
+library(foreach)
+
+#register cores
+registerDoMC(cores=4)
 
 #================================ Perform PCA analysis ==========================================
 pca_analysis <-function(dtm)
@@ -14,7 +19,7 @@ pca_analysis <-function(dtm)
 }
 
 #=============================== Perform Mantel's test =========================================
-mantel <- function(dtm)
+mantel <- function(dtm,k=2)
 {
   #define euclidean function
   euclidean <-function(x2,y2,x1,y1){
@@ -24,7 +29,6 @@ mantel <- function(dtm)
   }
   
   #initialize loop variables
-  k = 500
   v = nrow(dtm)
   record = c()
   
@@ -70,8 +74,8 @@ mantel <- function(dtm)
     record = rbind(record,rec)
     
     #increment counter
-    k = k+500
-    v = v-500
+    k = k+k
+    v = v-k
   } 
   
   #give column names
@@ -105,4 +109,17 @@ bayesian_network <- function(dtm)
   }
   bn = hc(dtm)
   return(bn)
+}
+
+#================================== Hierarchy on PCA =========================================
+
+hc_pca <- function(dtm)
+{
+  #pca
+  p = PCA(dtm)
+  
+  #hcpc
+  h = HCPC(p, nb.clust = 0, iter.max = 10, min = 3, max = NULL, graph = FALSE)
+  
+  return(h)
 }

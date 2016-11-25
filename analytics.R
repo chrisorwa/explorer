@@ -2,8 +2,8 @@
 #load required libraries
 library(ape)
 library(bnlearn)
-library(doMC)
-library(foreach)
+library(factoextra)
+library(FactoMineR)
 
 #register cores
 registerDoMC(cores=4)

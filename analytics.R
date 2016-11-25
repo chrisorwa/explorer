@@ -5,9 +5,6 @@ library(bnlearn)
 library(factoextra)
 library(FactoMineR)
 
-#register cores
-registerDoMC(cores=4)
-
 #================================ Perform PCA analysis ==========================================
 pca_analysis <-function(dtm)
 {

@@ -32,6 +32,10 @@ explore <- function(dtm)
   #dendrogram
   plot(d)
   
+  #correlation matrix
+  cmatrix = corr_plot(dtm)
+  plot(cmatrix)
+  
   #hc-pca
   plot(x = h, axes = c(1,2), choice = "3D.map", 
        draw.tree = TRUE, ind.names = TRUE, title = NULL,

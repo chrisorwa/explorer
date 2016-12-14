@@ -4,6 +4,7 @@ library(ape)
 library(bnlearn)
 library(factoextra)
 library(FactoMineR)
+library(corrplot)
 
 #================================ Perform PCA analysis ==========================================
 pca_analysis <-function(dtm)
@@ -120,3 +121,13 @@ hc_pca <- function(dtm)
   
   return(h)
 }
+
+#================================ Correlation Matrix ========================================
+
+corr_mat <- function(dtm)
+  {
+  cor.mat <- round(cor(dtm),2)
+  cm = corrplot(cor.mat, type="upper", order="hclust", 
+         tl.col="black", tl.srt=45)
+   return(cm)
+  }

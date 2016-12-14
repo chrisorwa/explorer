@@ -6,3 +6,4 @@ Statistical Exploration of Data
 * Mantel's Test on PCA
 * Dendrogram
 * Bayesian Network
+* Correlation Matrix
